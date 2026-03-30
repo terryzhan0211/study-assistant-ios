@@ -1,0 +1,63 @@
+name: StudyAssistant
+options:
+  bundleIdPrefix: com.terry
+  deploymentTarget:
+    iOS: "26.0"
+  xcodeVersion: "26.3"
+  swiftVersion: "6.0"
+
+packages:
+  WhisperKit:
+    url: https://github.com/argmaxinc/WhisperKit.git
+    from: "0.9.0"
+
+settings:
+  base:
+    SWIFT_STRICT_CONCURRENCY: complete
+    SWIFT_VERSION: "6.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "26.0"
+    CURRENT_PROJECT_VERSION: 1
+    MARKETING_VERSION: "1.0.0"
+    ENABLE_PREVIEWS: YES
+
+targets:
+  StudyAssistant:
+    type: application
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - path: StudyAssistant
+        excludes:
+          - "**/.DS_Store"
+    dependencies:
+      - package: WhisperKit
+        product: WhisperKit
+    info:
+      path: StudyAssistant/Info.plist
+      properties:
+        UILaunchScreen:
+          UIColorName: ""
+        NSSpeechRecognitionUsageDescription: "Used for real-time lecture transcription."
+        NSMicrophoneUsageDescription: "Used to record and transcribe your lectures."
+        UIBackgroundModes:
+          - audio
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations: {}
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.terry.StudyAssistant
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+
+  StudyAssistantTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "26.0"
+    sources:
+      - StudyAssistantTests
+    dependencies:
+      - target: StudyAssistant
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.terry.StudyAssistantTests

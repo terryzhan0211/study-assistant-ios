@@ -1,0 +1,36 @@
+model_list:
+  # Fast/cheap default — used for summarize, flashcards, chat
+  - model_name: gpt-4o-mini
+    litellm_params:
+      model: openai/gpt-4o-mini
+      api_key: os.environ/OPENAI_API_KEY
+
+  # High-quality — used for complex reasoning, long context
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY
+
+  # Google alternative
+  - model_name: gemini-pro
+    litellm_params:
+      model: gemini/gemini-1.5-pro-latest
+      api_key: os.environ/GEMINI_API_KEY
+
+  # Anthropic alternative
+  - model_name: claude-haiku
+    litellm_params:
+      model: anthropic/claude-haiku-4-5-20251001
+      api_key: os.environ/ANTHROPIC_API_KEY
+
+litellm_settings:
+  # Strip sensitive headers before forwarding
+  drop_params: true
+  # Return OpenAI-compatible SSE for streaming
+  success_callback: []
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  # Rate limit per API key: 60 req/min, 100k tokens/min
+  max_budget: 50          # USD per month total
+  budget_duration: "1mo"
